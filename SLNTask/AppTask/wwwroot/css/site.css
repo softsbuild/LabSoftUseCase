@@ -1,22 +1,183 @@
-html {
-  font-size: 14px;
+:root {
+    --bg-main: #0b0f19;
+    --card-bg: #151c2c;
+    --card-border: rgba(255, 255, 255, 0.08);
+    --primary-gradient: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+    --emerald-accent: #10b981;
+    --text-primary: #f8fafc;
+    --text-muted: #94a3b8;
 }
 
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+body.app-body {
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    min-height: 100vh;
+    margin: 0;
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+/* TOPBAR */
+.topbar {
+    height: 70px;
+    background: rgba(21, 28, 44, 0.7);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--card-border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 32px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
 
-html {
-  position: relative;
-  min-height: 100%;
+.topbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
 }
 
-body {
-  margin-bottom: 60px;
+.brand-badge {
+    width: 38px;
+    height: 38px;
+    background: var(--primary-gradient);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+}
+
+.brand-name {
+    font-weight: 800;
+    font-size: 1.25rem;
+    letter-spacing: -0.5px;
+}
+
+.text-emerald {
+    color: var(--emerald-accent);
+}
+
+.user-pill {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 6px 14px;
+    border-radius: 30px;
+    border: 1px solid var(--card-border);
+    font-size: 0.875rem;
+}
+
+.avatar {
+    width: 28px;
+    height: 28px;
+    background: var(--emerald-accent);
+    border-radius: 50%;
+    color: #000;
+    font-weight: 700;
+    font-size: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* LAYOUT & SIDEBAR */
+.app-layout {
+    display: flex;
+    gap: 24px;
+    padding: 24px 32px;
+}
+
+.sidebar-floating {
+    width: 220px;
+    flex-shrink: 0;
+}
+
+.nav-flex {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    position: sticky;
+    top: 94px;
+}
+
+.nav-btn {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 18px;
+    color: var(--text-muted);
+    text-decoration: none;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.25s ease;
+    border: 1px solid transparent;
+}
+
+    .nav-btn:hover {
+        color: #fff;
+        background: rgba(255, 255, 255, 0.04);
+    }
+
+    .nav-btn.active {
+        background: var(--primary-gradient);
+        color: #fff;
+        box-shadow: 0 8px 20px -6px rgba(99, 102, 241, 0.5);
+    }
+
+.main-stage {
+    flex-grow: 1;
+}
+
+/* CARDS PRO */
+.glass-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 20px;
+    padding: 24px;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+    .glass-card:hover {
+        border-color: rgba(99, 102, 241, 0.4);
+        transform: translateY(-3px);
+    }
+
+.btn-emerald {
+    background: var(--emerald-accent);
+    color: #000;
+    font-weight: 700;
+    border: none;
+    padding: 10px 22px;
+    border-radius: 12px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: filter 0.2s ease;
+}
+
+    .btn-emerald:hover {
+        filter: brightness(1.1);
+        color: #000;
+    }
+
+.status-pill {
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.status-done {
+    background: rgba(16, 185, 129, 0.15);
+    color: #34d399;
+}
+
+.status-progress {
+    background: rgba(245, 158, 11, 0.15);
+    color: #fbbf24;
 }
