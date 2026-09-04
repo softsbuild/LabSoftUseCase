@@ -15,6 +15,8 @@ public partial class DbTasksContext : DbContext
     {
     }
 
+    public virtual DbSet<Departamento> Departamentos { get; set; }
+
     public virtual DbSet<Funcionario> Funcionarios { get; set; }
 
     public virtual DbSet<Incidente> Incidentes { get; set; }
@@ -26,9 +28,21 @@ public partial class DbTasksContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<Departamento>(entity =>
+        {
+            entity.HasKey(e => e.Codigo).HasName("PK__departam__06370DAD8E35A839");
+
+            entity.ToTable("departamento");
+
+            entity.Property(e => e.Ativo).HasDefaultValue(true);
+            entity.Property(e => e.Descricao)
+                .HasMaxLength(200)
+                .IsUnicode(false);
+        });
+
         modelBuilder.Entity<Funcionario>(entity =>
         {
-            entity.HasKey(e => e.Codigo).HasName("PK__Funciona__06370DAD7DEF538B");
+            entity.HasKey(e => e.Codigo).HasName("PK__Funciona__06370DAD73461753");
 
             entity.ToTable("Funcionario");
 
@@ -38,18 +52,11 @@ public partial class DbTasksContext : DbContext
             entity.Property(e => e.Nome)
                 .HasMaxLength(100)
                 .IsUnicode(false);
-
-
-            entity.HasOne(d => d.Gerente)
-            .WithMany() 
-            .HasForeignKey(d => d.CodigoGerente)
-            .HasConstraintName("FK_Funcionario_Gerente");
-
         });
 
         modelBuilder.Entity<Incidente>(entity =>
         {
-            entity.HasKey(e => e.Codigo).HasName("PK__Incident__06370DAD255D018E");
+            entity.HasKey(e => e.Codigo).HasName("PK__Incident__06370DAD914F7F1B");
 
             entity.ToTable("Incidente");
 
@@ -63,12 +70,11 @@ public partial class DbTasksContext : DbContext
             entity.Property(e => e.Solucao)
                 .HasMaxLength(250)
                 .IsUnicode(false);
-
         });
 
         modelBuilder.Entity<Tarefa>(entity =>
         {
-            entity.HasKey(e => e.Codigo).HasName("PK__Tarefa__06370DAD87E8A95E");
+            entity.HasKey(e => e.Codigo).HasName("PK__Tarefa__06370DAD1866173C");
 
             entity.ToTable("Tarefa");
 
