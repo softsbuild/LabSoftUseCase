@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - AppTask Pro</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body class="app-body">
+    <!-- Topbar Superior Navbar -->
+    <header class="topbar">
+        <div class="topbar-brand">
+            <div class="brand-badge"><i class="fa-solid fa-bolt"></i></div>
+            <span class="brand-name">AppTask <span class="text-emerald">PRO</span></span>
+        </div>
+        <div class="topbar-actions">
+            <div class="user-pill">
+                <div class="avatar">AD</div>
+                <span>Admin System</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="app-layout">
+        <!-- Floating Navigation Bar -->
+        <aside class="sidebar-floating">
+            <nav class="nav-flex">
+                <a asp-controller="Home" asp-action="Index" class="nav-btn @(ViewContext.RouteData.Values["Controller"]?.ToString() == "Home" ? "active" : "")">
+                    <i class="fa-solid fa-chart-pie"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a asp-controller="Tarefa" asp-action="Index" class="nav-btn @(ViewContext.RouteData.Values["Controller"]?.ToString() == "Tarefa" ? "active" : "")">
+                    <i class="fa-solid fa-list-check"></i>
+                    <span>Tarefas</span>
+                </a>
+                <a asp-controller="Funcionario" asp-action="Index" class="nav-btn @(ViewContext.RouteData.Values["Controller"]?.ToString() == "Funcionario" ? "active" : "")">
+                    <i class="fa-solid fa-id-card"></i>
+                    <span>Equipes</span>
+                </a>
+                <a asp-controller="Departamento" asp-action="Index" class="nav-btn @(ViewContext.RouteData.Values["Controller"]?.ToString() == "Departamento" ? "active" : "")">
+                    <i class="fa-solid fa-sitemap"></i>
+                    <span>Setores</span>
+                </a>
+                <a asp-controller="Incidente" asp-action="Index" class="nav-btn @(ViewContext.RouteData.Values["Controller"]?.ToString() == "Incidente" ? "active" : "")">
+                    <i class="fa-solid fa-shield-cat"></i>
+                    <span>Incidentes</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-stage">
+            @RenderBody()
+        </main>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

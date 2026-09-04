@@ -1,0 +1,50 @@
+﻿@model IEnumerable<AppTask.Models.Incidente>
+
+@{
+    ViewData["Title"] = "Incidentes";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h2 class="fw-bold text-white mb-1">Central de Incidentes</h2>
+        <p class="text-light-muted small mb-0">Acompanhamento e resolução de ocorrências da plataforma</p>
+    </div>
+    <a asp-action="Create" class="btn-emerald">
+        <i class="fa-solid fa-triangle-exclamation"></i> Registrar Incidente
+    </a>
+</div>
+
+<div class="row g-4">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-6 col-xl-4">
+            <div class="glass-card">
+                <div class="d-flex justify-content-between align-items-start mb-3">
+                    <h5 class="fw-bold mb-0 text-white">@item.DescricaoProblema</h5>
+                    <span class="status-pill status-progress" style="background: rgba(239, 68, 68, 0.15); color: #f87171;">
+                        INCIDENTE
+                    </span>
+                </div>
+
+                <div class="mb-4">
+                    <div class="d-flex justify-content-between text-light-muted small mb-2">
+                        <span><i class="fa-regular fa-calendar me-1"></i> Data Abertura</span>
+                        <strong class="text-white">@(item.DataIncidente.ToString("dd/MM/yyyy HH:mm"))</strong>
+                    </div>
+                </div>
+
+                <div class="d-flex gap-2 pt-3 border-top border-secondary border-opacity-25">
+                    <a asp-action="Details" asp-route-id="@item.Codigo" class="btn btn-sm btn-outline-light w-100 border-0 bg-white bg-opacity-10 text-white">
+                        <i class="fa-solid fa-eye"></i>
+                    </a>
+                    <a asp-action="Edit" asp-route-id="@item.Codigo" class="btn btn-sm btn-outline-light w-100 border-0 bg-white bg-opacity-10 text-info">
+                        <i class="fa-solid fa-pen"></i>
+                    </a>
+                    <a asp-action="Delete" asp-route-id="@item.Codigo" class="btn btn-sm btn-outline-light w-100 border-0 bg-white bg-opacity-10 text-danger">
+                        <i class="fa-solid fa-trash"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
