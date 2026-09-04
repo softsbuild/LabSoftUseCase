@@ -181,3 +181,29 @@ body.app-body {
     background: rgba(245, 158, 11, 0.15);
     color: #fbbf24;
 }
+/* --- CORREÇÃO DE CORES DE TEXTO PARA TEMA ESCURO --- */
+body, table, td, th, label, input, select, p, span, h1, h2, h3, h4, h5, h6 {
+    color: #f8fafc !important;
+}
+
+.text-light-muted {
+    color: #cbd5e1 !important;
+}
+
+/* Tabelas com texto claro e fundo transparente/escuro */
+.table {
+    color: #f8fafc !important;
+    --bs-table-color: #f8fafc;
+    --bs-table-bg: transparent;
+}
+
+    .table th {
+        color: #ffffff !important;
+        font-weight: 700;
+        border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .table td {
+        color: #e2e8f0 !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
