@@ -48,6 +48,10 @@
                     <i class="fa-solid fa-shield-cat"></i>
                     <span>Incidentes</span>
                 </a>
+                <a asp-controller="CentralDeCusto" asp-action="Index" class="nav-btn @(ViewContext.RouteData.Values["Controller"]?.ToString() == "CentralDeCusto" ? "active" : "")">
+                    <i class="fa-solid fa-shield-cat"></i>
+                    <span>Central De Custo</span>
+                </a>
             </nav>
         </aside>
 

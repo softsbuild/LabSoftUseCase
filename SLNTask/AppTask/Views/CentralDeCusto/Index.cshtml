@@ -1,0 +1,66 @@
+﻿@model IEnumerable<AppTask.Models.CentralDeCusto>
+
+@{
+    ViewData["Title"] = "Gestão de Custos Anuais";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h2 class="fw-bold text-white mb-1">Central de Custos Anuais</h2>
+        <p class="text-light-muted small mb-0">Gerenciamento financeiro, metas e orçamentos da organização</p>
+    </div>
+    <a asp-action="Create" class="btn-emerald">
+        <i class="fa-solid fa-plus me-1"></i> Nova Meta de Custo
+    </a>
+</div>
+
+<div class="row g-4">
+    @if (!Model.Any())
+    {
+        <div class="col-12">
+            <div class="glass-card text-center py-5">
+                <i class="fa-solid fa-coins fs-1 text-light-muted mb-3"></i>
+                <h5 class="text-white">Nenhum custo cadastrado</h5>
+                <p class="text-light-muted mb-0">Cadastre o primeiro orçamento para visualizar os indicadores aqui.</p>
+            </div>
+        </div>
+    }
+
+    @foreach (var item in Model)
+    {
+        <div class="col-md-6 col-xl-4">
+            <div class="glass-card">
+                <div class="d-flex align-items-center gap-3 mb-3">
+                    <div class="avatar bg-success bg-opacity-25 text-emerald fs-5" style="width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+                        <i class="fa-solid fa-wallet"></i>
+                    </div>
+                    <div>
+                        <h5 class="fw-bold mb-0 text-white">@item.NomeCentral</h5>
+                        <small class="text-light-muted">Código: #@item.Codigo</small>
+                    </div>
+                </div>
+
+                <div class="mb-4 pt-2">
+                    <div class="d-flex justify-content-between align-items-center bg-dark bg-opacity-50 p-3 rounded-3 border border-secondary border-opacity-10">
+                        <span class="text-light-muted small"><i class="fa-solid fa-chart-line me-1 text-emerald"></i> Valor Meta Anual</span>
+                        <strong class="text-emerald fs-5 fw-bold">
+                            @(item.ValorMetaAnual.HasValue? item.ValorMetaAnual.Value.ToString("C") : "R$ 0,00")
+                        </strong>
+                    </div>
+                </div>
+
+                <div class="d-flex gap-2 pt-3 border-top border-secondary border-opacity-25">
+                    <a asp-action="Details" asp-route-id="@item.Codigo" class="btn btn-sm btn-outline-light w-100 border-0 bg-white bg-opacity-10 text-white">
+                        <i class="fa-solid fa-eye me-1"></i> Detalhes
+                    </a>
+                    <a asp-action="Edit" asp-route-id="@item.Codigo" class="btn btn-sm btn-outline-light w-100 border-0 bg-white bg-opacity-10 text-info">
+                        <i class="fa-solid fa-pen me-1"></i> Editar
+                    </a>
+                    <a asp-action="Delete" asp-route-id="@item.Codigo" class="btn btn-sm btn-outline-light w-100 border-0 bg-white bg-opacity-10 text-danger">
+                        <i class="fa-solid fa-trash me-1"></i> Excluir
+                    </a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
