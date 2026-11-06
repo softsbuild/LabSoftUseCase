@@ -34,6 +34,22 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="ReservaServico" asp-action="Index">Reserva de Serviços</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Usuario" asp-action="Index">Login Usuário</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav ms-auto">
+                        <!-- O ms-auto empurra o botão para a direita -->
+                        @if (User.Identity != null && User.Identity.IsAuthenticated)
+                        {
+                            <ul class="navbar-nav ms-auto">
+                                <li class="nav-item">
+                                    <a class="nav-link text-danger fw-bold" asp-controller="Account" asp-action="Logout">
+                                        <i class="bi bi-box-arrow-right"></i> Sair
+                                    </a>
+                                </li>
+                            </ul>
+                        }
                     </ul>
                 </div>
             </div>

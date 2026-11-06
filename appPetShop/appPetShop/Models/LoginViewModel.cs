@@ -4,8 +4,12 @@ namespace appPetShop.Models
 {
     public class LoginViewModel
     {
-        [Required(ErrorMessage = "O CPF é obrigatório.")]
-        [Display(Name = "CPF do Cliente")]
-        public string Cpf { get; set; } = string.Empty;
+        [Required(ErrorMessage = "O Username é obrigatório.")]
+        [Display(Name = "Nome de Utilizador")]
+        public string Username { get; set; } = string.Empty;
+
+        [Required(ErrorMessage = "A Senha é obrigatória.")]
+        [DataType(DataType.Password)]
+        public string Senha { get; set; } = string.Empty;
     }
 }

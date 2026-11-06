@@ -6,9 +6,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using appPetShop.Models;
+using System.Text;
+using System.Security.Cryptography;
+using Microsoft.AspNetCore.Authorization;
 
 namespace appPetShop.Controllers
 {
+    [Authorize]
     public class ClienteController : Controller
     {
         private readonly DbPetShopContext _context;
@@ -57,6 +61,8 @@ namespace appPetShop.Controllers
         {
             if (ModelState.IsValid)
             {
+               cliente.Cpf = GerarHashCpf(cliente.Cpf);
+
                 _context.Add(cliente);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -96,6 +102,8 @@ namespace appPetShop.Controllers
             {
                 try
                 {
+                    cliente.Cpf = GerarHashCpf(cliente.Cpf);
+
                     _context.Update(cliente);
                     await _context.SaveChangesAsync();
                 }
@@ -152,5 +160,20 @@ namespace appPetShop.Controllers
         {
             return _context.Clientes.Any(e => e.Codigo == id);
         }
+
+        private string GerarHashCpf(string cpf)
+        {
+            if (string.IsNullOrWhiteSpace(cpf))
+                return string.Empty;
+            
+            string cpfLimpo = string.Concat(Array.FindAll(cpf.ToCharArray(), char.IsDigit));
+
+            byte[] inputBytes = Encoding.UTF8.GetBytes(cpfLimpo);
+
+            byte[] hashBytes = SHA256.HashData(inputBytes);
+
+            return Convert.ToHexString(hashBytes).ToLowerInvariant();
+        }
+
     }
 }

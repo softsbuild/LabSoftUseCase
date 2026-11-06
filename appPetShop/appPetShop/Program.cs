@@ -10,16 +10,15 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<DbPetShopContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("ConexaoSqlServer")));
 
-// No Program.cs:
-builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-    .AddCookie(options =>
+
+
+builder.Services.AddAuthentication("CookieAuthentication")
+    .AddCookie("CookieAuthentication", options =>
     {
-        options.LoginPath = "/Account/Login";
-        options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
+        options.Cookie.Name = "PetShopLoginCookie";
+        options.LoginPath = "/Account/Login"; // Caminho para a sua página de login
+        options.AccessDeniedPath = "/Home/Index";
     });
-
-
-
 
 var app = builder.Build();
 
@@ -37,7 +36,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
